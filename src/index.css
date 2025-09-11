@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 
-:root {
-  --Neutral-900: hsl(243, 96%, 9%);
-  --Neutral-800: hsl(243, 27%, 20%);
-  --Neutral-700: hsl(243, 23%, 24%);
-  --Neutral-600: hsl(243, 23%, 30%);
-  --Neutral-300: hsl(240, 6%, 70%);
-  --Neutral-200: hsl(250, 6%, 84%);
-  --Neutral-0: hsl(0, 0%, 100%);
+@theme {
 
-  --Orange: hsl(28, 100%, 52%);
+  --color-Neutral-900: hsl(243, 96%, 9%);
+  --color-Neutral-800: hsl(243, 27%, 20%);
+  --color-Neutral-700: hsl(243, 23%, 24%);
+  --color-Neutral-600: hsl(243, 23%, 30%);
+  --color-Neutral-300: hsl(240, 6%, 70%);
+  --color-Neutral-200: hsl(250, 6%, 84%);
+  --color-Neutral-0: hsl(0, 0%, 100%);
 
-  --LightBlue: hsl(233, 67%, 56%);
-  --DarkBlue: hsl(248, 70%, 36%);
+  --color-Orange: hsl(28, 100%, 52%);
+
+  --color-LightBlue: hsl(233, 67%, 56%);
+  --color-DarkBlue: hsl(248, 70%, 36%);
 }
