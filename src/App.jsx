@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-    <div className='text-9xl text-Orange bg-DarkBlue'>Suiiii{/*
+    <div className='text-body bg-DarkBlue'>Suiiii{/*
          Units
 
   Switch to Imperial/Metric
