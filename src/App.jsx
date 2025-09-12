@@ -1,13 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './index.css'
+import Header from './components/Header'
+
 
 function App() {
 
   return (
     <>
-    <div className='text-body bg-DarkBlue'>Suiiii{/*
+    <main className='h-screen bg-Neutral-900'>
+      <Header />
+      {/*
          Units
 
   Switch to Imperial/Metric
@@ -50,7 +51,7 @@ function App() {
   Hourly forecast
   <!-- Insert hourly forecast for the selected day here -->
 
-*/}</div>
+*/}</main>
     </>
   )
 }
