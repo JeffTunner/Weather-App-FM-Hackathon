@@ -8,6 +8,7 @@ function App() {
     <>
     <main className='h-screen bg-Neutral-900'>
       <Header />
+      <h1 className='text-Neutral-0 font-bricolage font-bold text-title text-center'>How's the sky looking today?</h1>
       {/*
          Units
 
