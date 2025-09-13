@@ -1,5 +1,6 @@
 import './index.css'
 import Header from './components/Header'
+import MainContent from './components/main/MainContent'
 
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
     <>
     <main className='h-screen bg-Neutral-900'>
       <Header />
-      <h1 className='text-Neutral-0 font-bricolage font-bold text-title text-center'>How's the sky looking today?</h1>
+      <h1 className='text-Neutral-0 font-bricolage font-bold text-title leading-[120%] tracking-wide text-center'>How's the sky looking today?</h1>
+      <MainContent />
       {/*
          Units
 
