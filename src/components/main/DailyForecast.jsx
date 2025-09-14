@@ -9,7 +9,7 @@ import fogIcon from "../../assets/images/icon-fog.webp";
 function DailyForecast() {
 
     return(
-        <section className="flex flex-col gap-5 mt-12">
+        <section className="flex flex-col gap-5">
             <div>
                 <h1 className="text-Neutral-0 font-dm font-semibold text-xl leading-[120%]">Daily Forecast</h1>
             </div>

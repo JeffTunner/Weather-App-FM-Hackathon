@@ -4,7 +4,7 @@ import RightContent from "./RightContent.jsx";
 function ContentContainer() {
 
     return (
-        <main className="py-12">
+        <main className="flex gap-8">
             <LeftContent />
             <RightContent />
         </main>

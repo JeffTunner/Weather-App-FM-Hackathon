@@ -3,7 +3,7 @@ import ContentContainer from "./ContentContainer.jsx";
 
 function MainContent() {
     return (
-        <main className="px-28 py-16">
+        <main className="px-28 pb-20 flex flex-col gap-12">
             <SearchContainer />
             <ContentContainer />
         </main>

@@ -13,7 +13,7 @@ function Header() {
 
     return(
         <header >
-            <div className="flex justify-between px-28 py-12">
+            <div className="flex justify-between px-28 pt-12">
                 <div>
                     <img src={Logo} alt="logo" />
                 </div>

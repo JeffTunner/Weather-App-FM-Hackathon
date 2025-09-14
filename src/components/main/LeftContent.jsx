@@ -5,10 +5,15 @@ import WeatherInfo from "./WeatherInfo.jsx";
 function LeftContent() {
 
     return (
-        <section>
-            <WeatherInfo />
-            <WeatherDetail />
-            <DailyForecast />
+        <section className="flex flex-col gap-12 w-[800px]">
+            <div>
+                <WeatherInfo />
+                <WeatherDetail />
+            </div>
+            <div>
+                <DailyForecast />
+            </div>
+
         </section>
     );
 }
