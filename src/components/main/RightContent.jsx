@@ -13,8 +13,38 @@ function RightContent() {
                 </button>
             </section>
 
-            <section>
+            <section className="flex flex-col gap-4">
                 <div className="flex items-center bg-Neutral-700 border border-Neutral-600 pl-3 pt-2.5 pr-4 pb-2.5 rounded-lg justify-between">
+                    <span className="flex items-center gap-2">
+                        <img src={overcastIcon} alt="overcastIcon" className="w-[40px] h-[40px]" />
+                        <p className="font-dm font-medium text-Neutral-0 text-xl leading-[120%]">3 PM</p>
+                    </span>
+                    <span>
+                        <p className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%]">20°</p>
+                    </span>
+                </div>
+
+                                <div className="flex items-center bg-Neutral-700 border border-Neutral-600 pl-3 pt-2.5 pr-4 pb-2.5 rounded-lg justify-between">
+                    <span className="flex items-center gap-2">
+                        <img src={overcastIcon} alt="overcastIcon" className="w-[40px] h-[40px]" />
+                        <p className="font-dm font-medium text-Neutral-0 text-xl leading-[120%]">3 PM</p>
+                    </span>
+                    <span>
+                        <p className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%]">20°</p>
+                    </span>
+                </div>
+
+                                <div className="flex items-center bg-Neutral-700 border border-Neutral-600 pl-3 pt-2.5 pr-4 pb-2.5 rounded-lg justify-between">
+                    <span className="flex items-center gap-2">
+                        <img src={overcastIcon} alt="overcastIcon" className="w-[40px] h-[40px]" />
+                        <p className="font-dm font-medium text-Neutral-0 text-xl leading-[120%]">3 PM</p>
+                    </span>
+                    <span>
+                        <p className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%]">20°</p>
+                    </span>
+                </div>
+
+                                <div className="flex items-center bg-Neutral-700 border border-Neutral-600 pl-3 pt-2.5 pr-4 pb-2.5 rounded-lg justify-between">
                     <span className="flex items-center gap-2">
                         <img src={overcastIcon} alt="overcastIcon" className="w-[40px] h-[40px]" />
                         <p className="font-dm font-medium text-Neutral-0 text-xl leading-[120%]">3 PM</p>
