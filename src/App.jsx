@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-    <main className='h-full bg-Neutral-900 flex flex-col gap-16 mx-auto max-w-[1440px]'>
+    <main className='h-full bg-Neutral-900 flex flex-col gap-16'>
       <Header />
       <h1 className='text-Neutral-0 font-bricolage font-bold text-title leading-[120%] tracking-wide text-center'>How's the sky looking today?</h1>
       <MainContent />
