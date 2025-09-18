@@ -23,8 +23,8 @@ function Header() {
     }
 
     return(
-        <header >
-            <div className="flex justify-between px-28 pt-12">
+        <header>
+            <div className="flex justify-between items-center md:px-6 md:pt-6 lg:px-28 lg:pt-12 lg:max-w-[1440px] lg:mx-auto">
                 <div>
                     <img src={Logo} alt="logo" />
                 </div>

@@ -7,54 +7,14 @@ function App() {
 
   return (
     <>
-    <main className='h-full bg-Neutral-900 flex flex-col gap-16'>
-      <Header />
-      <h1 className='text-Neutral-0 font-bricolage font-bold text-title leading-[120%] tracking-wide text-center'>How's the sky looking today?</h1>
-      <MainContent />
-      {/*
-         Units
+    <main className='h-full w-screen px-4 pt-4 pb-12 md:w-full bg-Neutral-900 flex flex-col lg:gap-16 gap-12'>
+        <Header />
+      <div className='flex flex-col items-center lg:gap-16 gap-12'>
+        <h1 className='text-Neutral-0 font-bricolage font-bold text-title leading-[120%] tracking-wide text-center'>How's the sky looking today?</h1>
+        <MainContent />
+      </div>
 
-  Switch to Imperial/Metric
-
-  Temperature
-
-  Celsius (°C)
-  Fahrenheit (°F)
-
-  Wind Speed
-
-  km/h
-  mph
-
-  Precipitation
-
-  Millimeters (mm)
-  Inches (in)
-
-  How's the sky looking today?
-
-  Search for a city, e.g., New York
-  Search
-
-  Feels like
-  <!-- Insert temperature here -->
-
-  Humidity
-  <!-- Insert humidity here -->
-
-  Wind
-  <!-- Insert wind here -->   
-  
-  Precipitation
-  <!-- Insert precipitation here -->
-
-  Daily forecast
-  <!-- Insert daily forecast for the next 7 days here -->
-
-  Hourly forecast
-  <!-- Insert hourly forecast for the selected day here -->
-
-*/}</main>
+     </main>
     </>
   )
 }
