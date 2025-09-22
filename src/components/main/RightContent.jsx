@@ -26,7 +26,7 @@ function RightContent() {
                     <p className="text-Neutral-0 font-dm font-medium text-[16px] leading-[120%]">Tuesday</p> 
                     <img src={dropdownIcon} alt="dropdownIcon" className="w-[12] h-[18]" />
                 </button>
-                {/*weekday && (
+                {weekday && (
                     <section className="flex flex-col gap-1 p-2 bg-Neutral-800 border border-Neutral-600 rounded-xl w-[214px] absolute top-full -left-23 mt-2.5">
                         <button className="font-dm font-medium text-Neutral-200 text-[16px] leading-[120%] px-2 py-2.5 bg-Neutral-700 rounded-lg text-left ">Monday</button>
                         <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700 hover:text-Neutral-200">Tuesday</button>
@@ -36,7 +36,7 @@ function RightContent() {
                         <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700 hover:text-Neutral-200">Saturday</button>
                         <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700 hover:text-Neutral-200">Sunday</button>
                     </section>
-                )*/}
+                )}
                 </div>
             </section>
 
