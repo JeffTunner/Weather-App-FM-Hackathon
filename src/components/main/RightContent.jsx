@@ -36,7 +36,7 @@ function RightContent() {
                         <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700 hover:text-Neutral-200">Saturday</button>
                         <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700 hover:text-Neutral-200">Sunday</button>
                     </section>
-                )}
+                ) }
                 </div>
             </section>
 
