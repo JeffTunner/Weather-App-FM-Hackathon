@@ -1,4 +1,5 @@
 import './index.css'
+import './api/geocoding'
 import Header from './components/Header'
 import MainContent from './components/main/MainContent'
 
