@@ -1,24 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "../../assets/images/icon-search.svg";
+import getLocation from "../../api/geocoding.js";
 
 function SearchContainer() {
 
     const [dropdown, setDropdown] = useState(false);
-    const [location, setLocation] = useState("");
+    const [input, setInput] = useState("");
+    const [options, setOptions] = useState([]);
+    const [selectedCity, setSelectedCity] = useState({});
 
     function handleInput(e) {
-        setLocation(e.target.value);
+        setInput(e.target.value);
         if(e.target.value.trim() === ""){
             setDropdown(false);
         }
     }
 
-    function handleDropdown() {
-        if(location.trim() !== ""){
+    async function handleDropdown() {
+        if(input.trim() !== ""){
+            const response = await getLocation(input);
+            setOptions(response); 
             setDropdown(true);
         } else {
             setDropdown(false);
         }
+    }
+
+    function handleSelectedCity(i) {
+        setSelectedCity(options[i]);
+        setDropdown(false);
+        setInput(`${options[i].name}, ${options[i].country}`);
     }
 
     return (
@@ -33,20 +44,25 @@ function SearchContainer() {
             <input
                 type="text"
                 placeholder="Search for a place..."
-                value={location}
+                value={input}
                 className="pl-12 pr-4 py-4 font-dm font-medium text-Neutral-200 text-xl leading-[120%] border-none bg-Neutral-800 rounded-xl w-full hover:bg-Neutral-700"
                 onChange={(e) => handleInput(e)}
             />
-            {dropdown && (
+            {dropdown && options && (
                 <div className="absolute top-full mt-2.5 z-50 w-full md:max-w-[590px] lg:max-w-[526px] flex flex-col gap-1 p-2 bg-Neutral-800 border border-Neutral-700 rounded-xl">
-                    <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left bg-Neutral-700 border border-Neutral-600">City1</button>
-                    <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700  ">City2</button>
-                    <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700 ">City3</button>
-                    <button className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700 ">City4</button>
+                    {options.map((city, index) => (
+                        <button
+                        key={index}
+                        id={city.id} 
+                        className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700"
+                        onClick={() => handleSelectedCity(index)}
+                        >
+                            {city.name}, {city.country}
+                        </button>
+                    ))}
                 </div>
             )}
             </div>
-
 
             <div>
                 <button 
