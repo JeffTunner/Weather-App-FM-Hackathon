@@ -6,6 +6,13 @@ function SearchContainer() {
     const [dropdown, setDropdown] = useState(false);
     const [location, setLocation] = useState("");
 
+    function handleInput(e) {
+        setLocation(e.target.value);
+        if(e.target.value.trim() === ""){
+            setDropdown(false);
+        }
+    }
+
     function handleDropdown() {
         if(location.trim() !== ""){
             setDropdown(true);
@@ -28,7 +35,7 @@ function SearchContainer() {
                 placeholder="Search for a place..."
                 value={location}
                 className="pl-12 pr-4 py-4 font-dm font-medium text-Neutral-200 text-xl leading-[120%] border-none bg-Neutral-800 rounded-xl w-full hover:bg-Neutral-700"
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={(e) => handleInput(e)}
             />
             {dropdown && (
                 <div className="absolute top-full mt-2.5 z-50 w-full md:max-w-[590px] lg:max-w-[526px] flex flex-col gap-1 p-2 bg-Neutral-800 border border-Neutral-700 rounded-xl">
