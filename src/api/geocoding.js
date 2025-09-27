@@ -1,6 +1,5 @@
 
 async function getLocation(city) {
-    let name = 'Delhi'
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=4&language=en&format=json`;
     try {
         const response = await fetch(url);

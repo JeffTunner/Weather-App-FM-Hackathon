@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchIcon from "../../assets/images/icon-search.svg";
 import getLocation from "../../api/geocoding.js";
+import getWeather from "../../api/weatherAPI.js";
 
 function SearchContainer() {
 
@@ -26,8 +27,9 @@ function SearchContainer() {
         }
     }
 
-    function handleSelectedCity(i) {
+    async function handleSelectedCity(i) {
         setSelectedCity(options[i]);
+        const response = await getWeather(options[i].latitude, options[i].longitude);
         setDropdown(false);
         setInput(`${options[i].name}, ${options[i].country}`);
     }
