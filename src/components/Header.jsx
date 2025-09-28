@@ -3,6 +3,7 @@ import UnitLogo from "../assets/images/icon-units.svg";
 import Dropdown from "../assets/images/icon-dropdown.svg";
 import checkIcon from "../assets/images/icon-checkmark.svg";
 import { useState } from "react";
+import getWeather from "../api/weatherAPI.js";
 function Header() {
 
     const[units, setUnits] = useState("Imperial");
@@ -35,10 +36,8 @@ function Header() {
                         <span className="font-dm font-medium text-sm leading-[120%] md:text-[16px]">Units</span> 
                         <img src={Dropdown}/>
                     </button>
-                </div>
-            </div>
-            {/*!dropdown && (
-                <section className="bg-Neutral-800 border border-Neutral-600 rounded-xl px-2 py-1.5 w-[214px] h-[412px] absolute right-0 mr-28 mt-2.5">
+                    {!dropdown && (
+                    <section className="bg-Neutral-800 border border-Neutral-600 rounded-xl px-2 py-1.5 w-[214px] h-[412px] absolute top-full z-50 right-0 mt-2.5">
                     <button className="px-2 py-2.5 hover:bg-Neutral-700 w-full rounded-lg cursor-pointer flex"
                     onClick={handleUnit}>
                         <h1 className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%]">Switch to {units}</h1>
@@ -89,7 +88,10 @@ function Header() {
                         </div>
                     </div>                   
                 </section>
-                )*/}
+                )}
+                </div>
+            </div>
+
         </header>
     );
 }
