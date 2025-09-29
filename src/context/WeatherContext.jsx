@@ -1,36 +1,38 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const WeatherCOntext = createContext();
+const WeatherContext = createContext();
 
 export function WeatherProvider({children}) {
 
-    const [selectedCity, setSelectedCity] = useState({});
-    const [weatherData, setWeatherData] = useState({});
+    const [selectedCity, setSelectedCity] = useState(null);
+    const [weatherData, setWeatherData] = useState(null);
     const [unit, setUnit] = useState('celsius');
 
-    function handleSelectedCity() {
-
+    function handleSelectedCity(city) {
+        setSelectedCity(city);
     }
 
-    function handleUnit() {
-
+    function handleUnit(newUnit) {
+        setUnit(newUnit);
     }
 
-    function handleWeatherData() {
-
+    function handleWeatherData(data) {
+        setWeatherData(data);
     }
 
     return (
-        <WeatherCOntext.Provider
-        value={{handleSelectedCity, handleUnit, handleWeatherData}}
+        <WeatherContext.Provider
+        value={{
+            handleSelectedCity, handleUnit, handleWeatherData, selectedCity, unit, weatherData
+        }}
         >
             {children}
-        </WeatherCOntext.Provider>
+        </WeatherContext.Provider>
     );
 }
 
 export function useWeather() {
-    const ctx = useContext(WeatherCOntext);
+    const ctx = useContext(WeatherContext);
     if(!ctx) throw new Error("error");
     return ctx;
 }
