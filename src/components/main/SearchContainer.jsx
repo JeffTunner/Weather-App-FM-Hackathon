@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import SearchIcon from "../../assets/images/icon-search.svg";
 import getLocation from "../../api/geocoding.js";
 import getWeather from "../../api/weatherAPI.js";
+import { useWeather } from "../../context/WeatherContext.jsx";
 
 function SearchContainer() {
+
+    const {handleSelectedCity, setLat, setLon} = useWeather();
 
     const [dropdown, setDropdown] = useState(false);
     const [input, setInput] = useState("");
     const [options, setOptions] = useState([]);
-    const [selectedCity, setSelectedCity] = useState({});
 
     function handleInput(e) {
         setInput(e.target.value);
@@ -27,8 +29,8 @@ function SearchContainer() {
         }
     }
 
-    async function handleSelectedCity(i) {
-        setSelectedCity(options[i]);
+    async function handleCity(i) {
+        handleSelectedCity(options[i]);
         const response = await getWeather(options[i].latitude, options[i].longitude);
         setDropdown(false);
         setInput(`${options[i].name}, ${options[i].country}`);
@@ -57,7 +59,7 @@ function SearchContainer() {
                         key={index}
                         id={city.id} 
                         className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left hover:bg-Neutral-700"
-                        onClick={() => handleSelectedCity(index)}
+                        onClick={() => handleCity(index)}
                         >
                             {city.name}, {city.country}
                         </button>

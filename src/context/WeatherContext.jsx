@@ -5,11 +5,15 @@ const WeatherContext = createContext();
 export function WeatherProvider({children}) {
 
     const [selectedCity, setSelectedCity] = useState(null);
+    const [lat, setLat] = useState(null);
+    const [lon, setLon] = useState(null);
     const [weatherData, setWeatherData] = useState(null);
     const [unit, setUnit] = useState('celsius');
 
     function handleSelectedCity(city) {
         setSelectedCity(city);
+        setLat(city.latitude);
+        setLon(city.longitude);
     }
 
     function handleUnit(newUnit) {
@@ -23,7 +27,7 @@ export function WeatherProvider({children}) {
     return (
         <WeatherContext.Provider
         value={{
-            handleSelectedCity, handleUnit, handleWeatherData, selectedCity, unit, weatherData
+            handleSelectedCity, handleUnit, handleWeatherData, selectedCity, unit, weatherData, setLat, setLon
         }}
         >
             {children}
