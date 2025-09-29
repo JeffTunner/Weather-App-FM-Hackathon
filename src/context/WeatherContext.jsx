@@ -4,14 +4,26 @@ const WeatherCOntext = createContext();
 
 export function WeatherProvider({children}) {
 
-    /*const [selectedCity, setSelectedCity] = useState({});
+    const [selectedCity, setSelectedCity] = useState({});
     const [weatherData, setWeatherData] = useState({});
     const [unit, setUnit] = useState('celsius');
-*/
 
+    function handleSelectedCity() {
+
+    }
+
+    function handleUnit() {
+
+    }
+
+    function handleWeatherData() {
+
+    }
 
     return (
-        <WeatherCOntext.Provider>
+        <WeatherCOntext.Provider
+        value={{handleSelectedCity, handleUnit, handleWeatherData}}
+        >
             {children}
         </WeatherCOntext.Provider>
     );
