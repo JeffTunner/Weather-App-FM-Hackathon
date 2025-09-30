@@ -12,16 +12,25 @@ export function WeatherProvider({children}) {
     const [temperatureUnit, setTemperatureUnit] = useState('celsius');
     const [windUnit, setWindUnit] = useState('kmh');
     const [precipitationUnit, setPrecipitationUnit] = useState('mm');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
 
     async function handleSelectedCity(city) {
         setSelectedCity(city);
         setLat(city.latitude);
         setLon(city.longitude);
+        setLoading(true);
+        setError(null);
 
-        const response = await getWeather(city.latitude, city.longitude, windUnit, temperatureUnit, precipitationUnit);
-        setWeatherData(response);
-
+        try {
+            const response = await getWeather(city.latitude, city.longitude, windUnit, temperatureUnit, precipitationUnit);
+            setWeatherData(response);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     function handleGlobalUnit(mode) {
@@ -36,11 +45,29 @@ export function WeatherProvider({children}) {
         }
     }
 
+    useEffect(() => {
+        setLoading(true);
+        setError(null);
+        try {
+            if (lat && lon) {
+            (async () => {
+            const response = await getWeather(lat, lon, windUnit, temperatureUnit, precipitationUnit);
+            setWeatherData(response);
+            })();
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }, [lat, lon, temperatureUnit, windUnit, precipitationUnit]);
+
+
     return (
         <WeatherContext.Provider
         value={{
             handleSelectedCity, handleGlobalUnit,
-            selectedCity, weatherData, setLat, setLon,
+            selectedCity, weatherData,
             temperatureUnit, setTemperatureUnit,
             precipitationUnit, setPrecipitationUnit,
             windUnit, setWindUnit
