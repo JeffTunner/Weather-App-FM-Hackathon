@@ -19,7 +19,7 @@ export function WeatherProvider({children}) {
         setLat(city.latitude);
         setLon(city.longitude);
 
-        const response = await getWeather(city.latitude, city.longitude);
+        const response = await getWeather(city.latitude, city.longitude, windUnit, temperatureUnit, precipitationUnit);
         setWeatherData(response);
 
     }

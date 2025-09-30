@@ -6,7 +6,7 @@ import { useWeather } from "../../context/WeatherContext.jsx";
 
 function SearchContainer() {
 
-    const {handleSelectedCity, setLat, setLon} = useWeather();
+    const {handleSelectedCity} = useWeather();
 
     const [dropdown, setDropdown] = useState(false);
     const [input, setInput] = useState("");
