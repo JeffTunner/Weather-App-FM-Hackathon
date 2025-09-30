@@ -15,22 +15,10 @@ export function WeatherProvider({children}) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-
     async function handleSelectedCity(city) {
         setSelectedCity(city);
         setLat(city.latitude);
         setLon(city.longitude);
-        setLoading(true);
-        setError(null);
-
-        try {
-            const response = await getWeather(city.latitude, city.longitude, windUnit, temperatureUnit, precipitationUnit);
-            setWeatherData(response);
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
     }
 
     function handleGlobalUnit(mode) {
@@ -46,22 +34,22 @@ export function WeatherProvider({children}) {
     }
 
     useEffect(() => {
-        setLoading(true);
-        setError(null);
-        try {
-            if (lat && lon) {
-            (async () => {
-            const response = await getWeather(lat, lon, windUnit, temperatureUnit, precipitationUnit);
-            setWeatherData(response);
-            })();
-            }
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    }, [lat, lon, temperatureUnit, windUnit, precipitationUnit]);
+        if(!lat || !lon) return;
 
+        const fetchWeather = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const response = await getWeather(lat, lon, windUnit, temperatureUnit, precipitationUnit);
+                setWeatherData(response);
+            } catch (error) {
+            setError(error.message);
+            } finally {
+            setLoading(false);
+            }
+        };
+        fetchWeather();
+    }, [lat, lon, temperatureUnit, windUnit, precipitationUnit]);
 
     return (
         <WeatherContext.Provider
