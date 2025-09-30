@@ -8,7 +8,10 @@ export function WeatherProvider({children}) {
     const [lat, setLat] = useState(null);
     const [lon, setLon] = useState(null);
     const [weatherData, setWeatherData] = useState(null);
-    const [unit, setUnit] = useState('celsius');
+    const [temperatureUnit, setTemperatureUnit] = useState('celsius');
+    const [windUnit, setWindUnit] = useState('kmh');
+    const [precipitationUnit, setPrecipitationUnit] = useState('mm');
+
 
     function handleSelectedCity(city) {
         setSelectedCity(city);
@@ -16,8 +19,16 @@ export function WeatherProvider({children}) {
         setLon(city.longitude);
     }
 
-    function handleUnit(newUnit) {
-        setUnit(newUnit);
+    function handleGlobalUnit(mode) {
+        if(mode === 'Metric') {
+            setTemperatureUnit('celsius');
+            setWindUnit('kmh');
+            setPrecipitationUnit('mm');
+        } else if(mode === 'Imperial') {
+            setTemperatureUnit('fahrenheit');
+            setWindUnit('mph');
+            setPrecipitationUnit('inch');
+        }
     }
 
     function handleWeatherData(data) {
@@ -27,7 +38,11 @@ export function WeatherProvider({children}) {
     return (
         <WeatherContext.Provider
         value={{
-            handleSelectedCity, handleUnit, handleWeatherData, selectedCity, unit, weatherData, setLat, setLon
+            handleSelectedCity, handleGlobalUnit, handleWeatherData, 
+            selectedCity, weatherData, setLat, setLon,
+            temperatureUnit, setTemperatureUnit,
+            precipitationUnit, setPrecipitationUnit,
+            windUnit, setWindUnit
         }}
         >
             {children}
