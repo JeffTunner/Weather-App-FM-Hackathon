@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import getWeather from "../api/weatherAPI.js";
 
 const WeatherContext = createContext();
 
@@ -13,10 +14,14 @@ export function WeatherProvider({children}) {
     const [precipitationUnit, setPrecipitationUnit] = useState('mm');
 
 
-    function handleSelectedCity(city) {
+    async function handleSelectedCity(city) {
         setSelectedCity(city);
         setLat(city.latitude);
         setLon(city.longitude);
+
+        const response = await getWeather(city.latitude, city.longitude);
+        setWeatherData(response);
+
     }
 
     function handleGlobalUnit(mode) {
@@ -31,14 +36,10 @@ export function WeatherProvider({children}) {
         }
     }
 
-    function handleWeatherData(data) {
-        setWeatherData(data);
-    }
-
     return (
         <WeatherContext.Provider
         value={{
-            handleSelectedCity, handleGlobalUnit, handleWeatherData, 
+            handleSelectedCity, handleGlobalUnit,
             selectedCity, weatherData, setLat, setLon,
             temperatureUnit, setTemperatureUnit,
             precipitationUnit, setPrecipitationUnit,

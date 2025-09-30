@@ -30,8 +30,7 @@ function SearchContainer() {
     }
 
     async function handleCity(i) {
-        handleSelectedCity(options[i]);
-        const response = await getWeather(options[i].latitude, options[i].longitude);
+        await handleSelectedCity(options[i]);
         setDropdown(false);
         setInput(`${options[i].name}, ${options[i].country}`);
     }
