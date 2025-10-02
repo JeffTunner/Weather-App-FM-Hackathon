@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import getWeather from "../api/weatherAPI.js";
+import getLocation from "../api/geocoding.js";
 
 const WeatherContext = createContext();
 
@@ -14,6 +15,28 @@ export function WeatherProvider({children}) {
     const [precipitationUnit, setPrecipitationUnit] = useState('mm');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [locationLoading, setLocationLoading] = useState(false);
+    const [locationError, setLocationError] = useState(null);
+    const [locationResults, setLocationResults] = useState([]);
+
+    async function searchCity(query) {
+        if(!query.trim()) return;
+        setLocationLoading(true);
+        setLocationError(null);
+        try {
+            const response = await getLocation(query);
+            if(!response || response.length === 0){
+                setLocationError("No search result found!");
+                setLocationResults([]);
+            }else {
+                setLocationResults(response);
+            }
+        } catch (err) {
+            setLocationError("No search result found!");
+        } finally {
+            setLocationLoading(false);
+        }
+    }
 
     async function handleSelectedCity(city) {
         setSelectedCity(city);
@@ -58,7 +81,9 @@ export function WeatherProvider({children}) {
             selectedCity, weatherData,
             temperatureUnit, setTemperatureUnit,
             precipitationUnit, setPrecipitationUnit,
-            windUnit, setWindUnit
+            windUnit, setWindUnit,
+            locationLoading, locationError, locationResults,
+            searchCity
         }}
         >
             {children}

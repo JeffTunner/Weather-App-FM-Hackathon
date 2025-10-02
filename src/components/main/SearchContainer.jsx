@@ -3,10 +3,11 @@ import SearchIcon from "../../assets/images/icon-search.svg";
 import getLocation from "../../api/geocoding.js";
 import getWeather from "../../api/weatherAPI.js";
 import { useWeather } from "../../context/WeatherContext.jsx";
+import loadingIcon from "../../assets/images/icon-loading.svg";
 
 function SearchContainer() {
 
-    const {handleSelectedCity} = useWeather();
+    const {handleSelectedCity, searchCity, locationLoading, locationError, locationResults} = useWeather();
 
     const [dropdown, setDropdown] = useState(false);
     const [input, setInput] = useState("");
@@ -19,10 +20,9 @@ function SearchContainer() {
         }
     }
 
-    async function handleDropdown() {
+    function handleDropdown() {
         if(input.trim() !== ""){
-            const response = await getLocation(input);
-            setOptions(response); 
+            searchCity(input);
             setDropdown(true);
         } else {
             setDropdown(false);
@@ -30,9 +30,9 @@ function SearchContainer() {
     }
 
     async function handleCity(i) {
-        await handleSelectedCity(options[i]);
+        await handleSelectedCity(locationResults[i]);
         setDropdown(false);
-        setInput(`${options[i].name}, ${options[i].country}`);
+        setInput(`${locationResults[i].name}, ${locationResults[i].country}`);
     }
 
     return (
@@ -51,9 +51,16 @@ function SearchContainer() {
                 className="pl-12 pr-4 py-4 font-dm font-medium text-Neutral-200 text-xl leading-[120%] border-none bg-Neutral-800 rounded-xl w-full hover:bg-Neutral-700"
                 onChange={(e) => handleInput(e)}
             />
-            {dropdown && options && (
+            {dropdown && (
                 <div className="absolute top-full mt-2.5 z-50 w-full md:max-w-[590px] lg:max-w-[526px] flex flex-col gap-1 p-2 bg-Neutral-800 border border-Neutral-700 rounded-xl">
-                    {options.map((city, index) => (
+
+                    {locationLoading && (
+                        <div className="flex gap-2.5 font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] px-2 py-2.5 rounded-lg text-left">
+                            <img src={loadingIcon} alt="loading"/>
+                            <p>Search in progress</p>
+                        </div>
+                    )}
+                    {!locationLoading && !locationError && locationResults && (locationResults.map((city, index) => (
                         <button
                         key={index}
                         id={city.id} 
@@ -62,7 +69,7 @@ function SearchContainer() {
                         >
                             {city.name}, {city.country}
                         </button>
-                    ))}
+                    )))}
                 </div>
             )}
             </div>
