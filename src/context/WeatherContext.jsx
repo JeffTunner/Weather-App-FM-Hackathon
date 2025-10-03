@@ -83,7 +83,7 @@ export function WeatherProvider({children}) {
             precipitationUnit, setPrecipitationUnit,
             windUnit, setWindUnit,
             locationLoading, locationError, locationResults,
-            searchCity
+            searchCity, error,loading
         }}
         >
             {children}
