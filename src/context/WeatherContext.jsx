@@ -56,23 +56,27 @@ export function WeatherProvider({children}) {
         }
     }
 
-    useEffect(() => {
+    const fetchWeather = async () => {
         if(!lat || !lon) return;
-
-        const fetchWeather = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const response = await getWeather(lat, lon, windUnit, temperatureUnit, precipitationUnit);
-                setWeatherData(response);
-            } catch (error) {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await getWeather(lat, lon, windUnit, temperatureUnit, precipitationUnit);
+            setWeatherData(response);
+        } catch (error) {
             setError(error.message);
-            } finally {
+        } finally {
             setLoading(false);
-            }
-        };
+        }
+    };
+
+    useEffect(() => {
         fetchWeather();
     }, [lat, lon, temperatureUnit, windUnit, precipitationUnit]);
+
+    const retryFetch = () => {
+        fetchWeather();
+    };
 
     return (
         <WeatherContext.Provider
@@ -83,7 +87,7 @@ export function WeatherProvider({children}) {
             precipitationUnit, setPrecipitationUnit,
             windUnit, setWindUnit,
             locationLoading, locationError, locationResults,
-            searchCity, error,loading
+            searchCity, error, loading, retryFetch
         }}
         >
             {children}

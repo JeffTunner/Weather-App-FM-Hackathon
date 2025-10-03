@@ -8,7 +8,7 @@ import errorIcon from "./assets/images/icon-error.svg"
 
 function App() {
 
-  const {error} = useWeather();
+  const {error, retryFetch} = useWeather();
 
   return (
     <>
@@ -26,7 +26,11 @@ function App() {
             </div>
             <h1 className='font-bricolage font-bold text-Neutral-0 text-[52px] leading-[120%]'>Something went wrong</h1>
             <p className='font-dm font-medium text-Neutral-200 text-xl leading-[120%] max-w-[554px] text-center'>We couldn't connect to the server (API error). Please try again in a few moments.</p>
-            <button className='bg-Neutral-700 px-4 py-3 rounded-lg font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] cursor-pointer hover:bg-Neutral-800'>Retry</button>
+            <button
+            onClick={retryFetch} 
+            className='bg-Neutral-700 px-4 py-3 rounded-lg font-dm font-medium text-Neutral-0 text-[16px] leading-[120%] cursor-pointer hover:bg-Neutral-800'>
+              Retry
+            </button>
           </section>
         )}
 
