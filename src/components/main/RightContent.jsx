@@ -14,7 +14,7 @@ function RightContent() {
 
     const today = new Date();
 
-    const {weatherData} = useWeather();
+    const {weatherData, loading} = useWeather();
     const [weekday, setWeekDay] = useState(false);
     const daysOfWeek = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
     const [selectedDay, setSelectedDay] = useState(getDayName(today));
@@ -54,7 +54,7 @@ function RightContent() {
         code: weatherData.hourly.weather_code[i],
     }))
     .filter(entry => getDayName(entry.time) === selectedDay)
-    .slice(0, 8);
+    .slice(12, 20);
 
 
     return (
@@ -63,7 +63,7 @@ function RightContent() {
                 <h1 className="text-Neutral-0 font-dm font-semibold text-xl leading-[120%]">Hourly Forecast</h1>
                 <div className="relative">
                 <button className="bg-Neutral-600 flex px-4 py-2 gap-3 rounded-lg cursor-pointer" onClick={handleWeek}>
-                    <p className="text-Neutral-0 font-dm font-medium text-[16px] leading-[120%]">{selectedDay}</p> 
+                    <p className="text-Neutral-0 font-dm font-medium text-[16px] leading-[120%]">{loading ? "-" : selectedDay}</p> 
                     <img src={dropdownIcon} alt="dropdownIcon" className="w-[12] h-[18]" />
                 </button>
                 {weekday && (
@@ -85,8 +85,20 @@ function RightContent() {
             </section>
 
             <section className="flex flex-col gap-4">
-                {weatherData ? ( filteredHours.map((entry) => (
+                {loading ? (
+                    Array.from({ length: 8 }).map((_, index) => (
+                        <div
+                        key={index}
+                        className="flex items-center bg-Neutral-700 border border-Neutral-600 pl-3 pt-2.5 pr-4 pb-2.5 rounded-lg justify-between"
+                        >
+                        <span className="flex items-center gap-2 h-[40px]" />
+                        <span className="h-[24px]" />
+                        </div>
+                ))) : 
+                weatherData ? ( filteredHours.map((entry) => (
                     <div key={entry.time} className="flex items-center bg-Neutral-700 border border-Neutral-600 pl-3 pt-2.5 pr-4 pb-2.5 rounded-lg justify-between">
+                    {!loading ? (
+                        <>
                     <span className="flex items-center gap-2">
                         <img src={getWeatherIcon(entry.code)} alt="overcastIcon" className="w-[40px] h-[40px]" />
                         <p className="font-dm font-medium text-Neutral-0 text-xl leading-[120%]">{getHourLabel(entry.time)}</p>
@@ -94,6 +106,14 @@ function RightContent() {
                     <span>
                         <p className="font-dm font-medium text-Neutral-0 text-[16px] leading-[120%]">{entry.temp}°</p>
                     </span>
+                        </>
+                    ) : (
+                        <>
+                        <span className="flex items-center gap-2 h-[40px]" />
+                        <span className="h-[24px]" />
+                        </>
+                    )}
+
                 </div>
                 ))
                 ) 
