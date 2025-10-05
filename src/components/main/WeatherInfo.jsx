@@ -8,16 +8,16 @@ import partlyCloudyIcon from "../../assets/images/icon-partly-cloudy.webp";
 import rainIcon from "../../assets/images/icon-rain.webp";
 import snowIcon from "../../assets/images/icon-snow.webp";
 import stormIcon from "../../assets/images/icon-storm.webp";
+import loadingIcon from "../../assets/images/icon-loading.svg";
 import { useState, useEffect } from "react";
 import { useWeather } from "../../context/WeatherContext.jsx";
 
 function WeatherInfo() {
+  const { selectedCity, weatherData, loading } = useWeather();
+  const [width, setWidth] = useState(window.innerWidth);
+  const [weatherIcon, setWeatherIcon] = useState(sunIcon);
 
-    const {selectedCity, weatherData} = useWeather();
-    const [width, setWidth] = useState(window.innerWidth);
-    const [weatherIcon, setWeatherIcon] = useState(sunIcon);
-
-    useEffect(() => {
+  useEffect(() => {
     if (!weatherData?.current?.weather_code) {
       setWeatherIcon(sunIcon);
       return;
@@ -35,49 +35,55 @@ function WeatherInfo() {
     else if (code === 85 || code === 86) setWeatherIcon(snowIcon);
     else if (code >= 95 && code <= 99) setWeatherIcon(stormIcon);
     else setWeatherIcon(sunIcon);
-    }, [weatherData]);
+  }, [weatherData]);
 
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString('en-US', {
-        weekday: "long",
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-    });
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.innerWidth);
-        }
-        window.addEventListener("resize", handleResize);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    },[]);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    return (
-        <>
-        <section className="flex flex-col items-center">
-            <div className="relative h-[286px] w-full bg-cover bg-center rounded-[20px]"
-            style={{backgroundImage: width > 768 ? `url(${BgLarge})` : `url(${BgSmall})`}}>
-                <div className="absolute inset-0 flex flex-col justify-center items-center px-6 md:flex-row md:justify-between">
-                    <div className="flex flex-col gap-3">
-                        <h1 className="font-dm font-bold text-Neutral-0 text-[28px] leading-[120%]">
-                            {selectedCity ? `${selectedCity.name}, ${selectedCity.country}` : "Berlin, Germany"}
-                        </h1>
-                        <p className="font-dm font-medium text-Neutral-200 text-[18px] leading-[120%]">{formattedDate}</p>
-                    </div>
-                    <div className="flex items-center gap-5">
-                        <img src={weatherIcon} alt="sunIcon" className="w-[120px] h-[120px]"/>
-                        <h2 className="font-dm font-semibold italic text-Neutral-0 text-8xl tracking-[-2px] leading-[100%]">
-                            {weatherData ? `${weatherData?.current?.temperature_2m}°` : "20°"}
-                        </h2>
-                    </div>
-                </div>
+  return (
+    <section className="flex flex-col items-center">
+      <div
+        className={`relative h-[286px] w-full rounded-[20px] flex justify-center items-center ${
+          loading ? "bg-Neutral-700" : "bg-cover bg-center"
+        }`}
+        style={!loading ? { backgroundImage: `url(${width > 768 ? BgLarge : BgSmall})` } : {}}
+      >
+        {loading ? (
+          <div className="flex flex-col items-center gap-4">
+            <img src={loadingIcon} alt="loading" className="w-16 h-16 animate-spin" />
+            <p className="text-Neutral-0 font-dm font-medium text-lg">Loading...</p>
+          </div>
+        ) : (
+          <div className="absolute inset-0 flex flex-col justify-center items-center px-6 md:flex-row md:justify-between">
+            <div className="flex flex-col gap-3">
+              <h1 className="font-dm font-bold text-Neutral-0 text-[28px] leading-[120%]">
+                {selectedCity ? `${selectedCity.name}, ${selectedCity.country}` : "Berlin, Germany"}
+              </h1>
+              <p className="font-dm font-medium text-Neutral-200 text-[18px] leading-[120%]">{formattedDate}</p>
             </div>
-        </section>
-        </>
-    );
+            <div className="flex items-center gap-5">
+              <img src={weatherIcon} alt="weatherIcon" className="w-[120px] h-[120px]" />
+              <h2 className="font-dm font-semibold italic text-Neutral-0 text-8xl tracking-[-2px] leading-[100%]">
+                {weatherData?.current?.temperature_2m ?? "20"}°
+              </h2>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }
+
 export default WeatherInfo;
