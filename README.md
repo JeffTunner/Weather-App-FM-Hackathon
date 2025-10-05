@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./app.png)
+![Screenshot of App](./main.png)
 
 ### Links
 
